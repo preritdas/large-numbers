@@ -35,6 +35,6 @@ if iterations < 500:
 st.write(
     """
     ----
-    Type `'r'` to run the simulation with the same input variables.
+    Press `'r'` to repeat the simulation with the same input variables.
     """
 )
