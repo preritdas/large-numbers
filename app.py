@@ -72,8 +72,8 @@ if iterations < 500:
     st.line_chart(y)
 
 # Show chart of all values
-st.subheader("Distribution of Random Selections")
 if max_value != 1:
+    st.subheader("Distribution of Random Selections")
     unique_numbers = list(np.unique(y))
     occurences = []
     for number in unique_numbers:
