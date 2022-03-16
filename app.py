@@ -69,7 +69,7 @@ if distribution_type == 'Perfectly Random':
         ax.legend()
         st.pyplot(fig)
 elif distribution_type == 'Normal': 
-    st.subheader("Random Values")
+    # st.subheader("Random Values")
 
     # Display Values
     values = y
@@ -98,7 +98,7 @@ elif distribution_type == 'Normal':
         st.pyplot(fig)
 
 # Show all values
-if iterations < 500:
+if iterations < 500 or distribution_type == 'Normal':
     st.subheader("Your Random Numbers")
     st.line_chart(y)
 
