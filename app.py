@@ -1,15 +1,23 @@
 import streamlit as st
 import random
 
-st.title("Law of Large Numbers")
+st.set_page_config(page_title = "Law of Large Numbers", page_icon = ":chart_with_upwards_trend:")
+st.title("The Law of Large Numbers")
+
+# Style
+def use_style(file_path: str):
+    with open(file_path, 'r') as f:
+        content = f.read()
+        st.markdown(f"<style>{content}</style>", unsafe_allow_html=True)
+use_style('style/style.css')
 
 # How many random trials
-iterations = st.slider(label = "Number of iterations.", min_value = 5, max_value = 10000, value = 50)
+iterations = st.slider(label = "Choose the number of iterations.", min_value = 5, max_value = 10000, value = 50)
 
 x = [_ for _ in range(iterations)] # create an array of consecutive integers
 y = [random.randint(0, 1) for _ in range(iterations)] # pick a random number for every iteration
 
-st.subheader("Moving Average")
+st.subheader("Average Value")
 
 # Calculate average
 avg = []
@@ -20,6 +28,6 @@ for pos, item in enumerate(y):
 
 st.line_chart(avg)
 
-st.subheader("Your Random Numbers")
-
-st.line_chart(y)
+if iterations < 500:
+    st.subheader("Your Random Numbers")
+    st.line_chart(y)
