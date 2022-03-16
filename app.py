@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import statistics
 
@@ -65,9 +66,26 @@ if st.checkbox("Show image-based pyplot chart."):
     ax.legend()
     st.pyplot(fig)
 
+# Show all values
 if iterations < 500:
     st.subheader("Your Random Numbers")
     st.line_chart(y)
+
+# Show chart of all values
+st.subheader("Distribution of Random Selections")
+if max_value != 1:
+    unique_numbers = list(np.unique(y))
+    occurences = []
+    for number in unique_numbers:
+        occurences.append(y.count(number))
+    chart_data = pd.DataFrame(
+        {
+            "Unique": unique_numbers,
+            "Occurences": occurences
+        }
+    ).set_index('Unique')
+    print(f"{chart_data = }")
+    st.bar_chart(data = chart_data)
 
 st.write(
     """
