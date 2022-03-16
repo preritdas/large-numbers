@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
+import statistics
 
 st.set_page_config(page_title = "Law of Large Numbers", page_icon = ":chart_with_upwards_trend:", layout = "wide")
 st.title("The Law of Large Numbers")
@@ -15,15 +16,18 @@ use_style('style/style.css')
 
 # How many random trials
 iterations = st.slider(label = "Choose the number of iterations.", min_value = 5, max_value = 10000, value = 50)
+# Min and Max
+slider_label = "Choose your values. If you leave this slider untouched, the program will simulate coin flips."
+min_value, max_value = st.slider(label = slider_label, max_value = 1000, value = (0, 1))
 
 x = [_ for _ in range(iterations)] # create an array of consecutive integers
-y = [random.randint(0, 1) for _ in range(iterations)] # pick a random number for every iteration
+y = [random.randint(min_value, max_value) for _ in range(iterations)] # pick a random number for every iteration
 
 st.subheader("Average Value")
 
 # Calculate average
 avg = []
-list_of_5 = [0.5 for _ in range(iterations)]
+list_of_5 = [statistics.mean([min_value, max_value]) for _ in range(iterations)]
 total = 0
 for pos, item in enumerate(y):
     total += item # maintain a running total
@@ -56,8 +60,9 @@ if st.checkbox("Show image-based pyplot chart."):
     fig, ax = plt.subplots()
     plt.style.use('fivethirtyeight')
     plt.title("Average Value")
-    ax.plot(avg)
-    ax.plot(list_of_5)
+    ax.plot(avg, label = "Current Average Value")
+    ax.plot(list_of_5, label = "Expected Value")
+    ax.legend()
     st.pyplot(fig)
 
 if iterations < 500:
