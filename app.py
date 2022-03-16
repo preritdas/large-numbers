@@ -9,10 +9,6 @@ iterations = st.slider(label = "Number of iterations.", min_value = 5, max_value
 x = [_ for _ in range(iterations)] # create an array of consecutive integers
 y = [random.randint(0, 1) for _ in range(iterations)] # pick a random number for every iteration
 
-st.subheader("Your Random Numbers")
-
-st.line_chart(y)
-
 st.subheader("Moving Average")
 
 # Calculate average
@@ -23,3 +19,7 @@ for pos, item in enumerate(y):
     avg.append(total/(pos+1)) # append avg with moving average
 
 st.line_chart(avg)
+
+st.subheader("Your Random Numbers")
+
+st.line_chart(y)
