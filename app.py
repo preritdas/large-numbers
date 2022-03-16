@@ -31,3 +31,10 @@ st.line_chart(avg)
 if iterations < 500:
     st.subheader("Your Random Numbers")
     st.line_chart(y)
+
+st.write(
+    """
+    ----
+    Type `'r'` to run the simulation with the same input variables.
+    """
+)
