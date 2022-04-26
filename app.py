@@ -35,8 +35,6 @@ slider_label = "Choose your values. If you leave this slider untouched, the prog
 min_value, max_value = st.slider(label = slider_label, max_value = 1000, value = (0, 1))
 inputs_mean = np.mean([min_value, max_value])
 
-
-
 # Determine the data
 x = [_ for _ in range(iterations)] # create an array of consecutive integers
 if distribution_type == 'Perfectly Random':
