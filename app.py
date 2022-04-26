@@ -1,9 +1,15 @@
+# Non-local imports
 import streamlit as st
-import random
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from streamlit_option_menu import option_menu
 
+# Local imports
+import random
+
+
+# Page configuration
 st.set_page_config(page_title = "Law of Large Numbers", page_icon = ":chart_with_upwards_trend:", layout = "wide")
 st.title("The Law of Large Numbers")
 
@@ -14,18 +20,22 @@ def use_style(file_path: str):
         st.markdown(f"<style>{content}</style>", unsafe_allow_html=True)
 use_style('style/style.css')
 
+# Distribution  with a menu
+distribution_type = option_menu(
+    menu_title = "Distribution Type",
+    options = ["Perfectly Random", "Normal"],
+    menu_icon = "bar-chart-fill",
+    icons = ["asterisk", "bar-chart"]
+)
+
 # How many random trials
 iterations = st.slider(label = "Choose the number of iterations.", min_value = 5, max_value = 10000, value = 50)
 # Min and Max
 slider_label = "Choose your values. If you leave this slider untouched, the program will simulate coin flips."
 min_value, max_value = st.slider(label = slider_label, max_value = 1000, value = (0, 1))
 inputs_mean = np.mean([min_value, max_value])
-# Distribution Type
-distribution_type = st.radio(
-    label = "Choose your distribution type.",
-    options = ('Perfectly Random', 'Normal'),
-    index = 0
-)
+
+
 
 # Determine the data
 x = [_ for _ in range(iterations)] # create an array of consecutive integers
@@ -115,7 +125,6 @@ if True: #max_value != 1:
             "Occurences": occurences
         }
     ).set_index('Unique')
-    print(f"{chart_data = }")
     st.bar_chart(data = chart_data)
 
 st.write(
